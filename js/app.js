@@ -27,9 +27,10 @@ async function getChefBirthday(id){
         throw new Error(chef.message);
     }
 
-    chef.birthDate = chef.birthDate.replaceAll("-", "/");
-    
-    return {chefBirthday: chef.birthDate};
+    // Formattazione della data di nascita del chef
+    let formatDate = dayjs(chef.birthDate).format('YYYY/MM/DD');
+    console.log(typeof chef.birthDate); // Controllo del tipo di dato
+    return formatDate;
 }
 
 // async function fetchJson(url){
@@ -41,7 +42,7 @@ async function getChefBirthday(id){
 (async () => {
     try{
         const birthDateChef = await getChefBirthday(1);
-        console.log(birthDateChef);
+        console.log("il compleanno dello chef è:", birthDateChef);
     }catch(error){
         console.error("Errore durante il recupero dei dati:", error);
     }
